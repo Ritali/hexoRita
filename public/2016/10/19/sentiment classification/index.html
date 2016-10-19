@@ -1,0 +1,637 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="情感分析," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="1. 基本任务和方法任务：NLPCC2013跨语言情感分类（英文-&amp;gt;中文）环境：Ubuntu 服务器（4 Intel(R) Xeon(R)CPU E5-2609 v3  @1.90GHz），Anacanda2.4（64-bit），python2.7基本方法：（1）中文SVM分类；（2）英文SVM分类；（3）英文SVM自学习评价标准：准确率(Accuracy)Accuracy = #syste">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跨语言情感分析">
+<meta property="og:url" content="http://yoursite.com/2016/10/19/sentiment classification/index.html">
+<meta property="og:site_name" content="Ritali's blog">
+<meta property="og:description" content="1. 基本任务和方法任务：NLPCC2013跨语言情感分类（英文-&amp;gt;中文）环境：Ubuntu 服务器（4 Intel(R) Xeon(R)CPU E5-2609 v3  @1.90GHz），Anacanda2.4（64-bit），python2.7基本方法：（1）中文SVM分类；（2）英文SVM分类；（3）英文SVM自学习评价标准：准确率(Accuracy)Accuracy = #syste">
+<meta property="og:updated_time" content="2016-10-19T09:36:21.991Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="跨语言情感分析">
+<meta name="twitter:description" content="1. 基本任务和方法任务：NLPCC2013跨语言情感分类（英文-&amp;gt;中文）环境：Ubuntu 服务器（4 Intel(R) Xeon(R)CPU E5-2609 v3  @1.90GHz），Anacanda2.4（64-bit），python2.7基本方法：（1）中文SVM分类；（2）英文SVM分类；（3）英文SVM自学习评价标准：准确率(Accuracy)Accuracy = #syste">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/19/sentiment classification/"/>
+
+
+  <title> 跨语言情感分析 | Ritali's blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ritali's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">live better and better</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                跨语言情感分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-19T10:46:20+08:00" content="2016-10-19">
+              2016-10-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/语义计算/" itemprop="url" rel="index">
+                    <span itemprop="name">语义计算</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          <span>&nbsp; | &nbsp; 
+          visited: &nbsp; <span id="busuanzi_value_page_pv" ></span>
+          </span>    
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="1-基本任务和方法"><a href="#1-基本任务和方法" class="headerlink" title="1. 基本任务和方法"></a>1. 基本任务和方法</h5><p>任务：NLPCC2013跨语言情感分类（英文-&gt;中文）<br>环境：Ubuntu 服务器（4 Intel(R) Xeon(R)CPU E5-2609 v3  @1.90GHz），Anacanda2.4（64-bit），python2.7<br>基本方法：（1）中文SVM分类；（2）英文SVM分类；（3）英文SVM自学习<br>评价标准：准确率(Accuracy)<br>Accuracy = #system_correct / #system_total<br>其中#system_correct表示分类准确的评论数，#system_total表示测试集内全部评论数。</p>
+<h5 id="2-数据预处理"><a href="#2-数据预处理" class="headerlink" title="2. 数据预处理"></a>2. 数据预处理</h5><p>主要包括XML原文件解析，语料翻译，去除特殊符号。<br>（1）  解析XML<br>所需要的模块：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> xml.etree <span class="keyword">import</span> ElementTree <span class="keyword">as</span> ET  <span class="comment">#引入解析xml文件的模块  </span></div><div class="line"><span class="keyword">import</span> re  </div><div class="line"><span class="keyword">import</span> gTrans</div></pre></td></tr></table></figure></p>
+<p>详细代码：googleTranslate.extractXMLEnglishText()<br>（2）  调用google translator API，进行翻译<br>训练数据英文翻译成中文，测试数据中文翻译成英文，翻译完成后，每篇评论都有中英两种表示。<br>所需要的模块：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> re  </div><div class="line"><span class="keyword">import</span> string  </div><div class="line"><span class="keyword">import</span> urllib,urllib2  <span class="comment">#引入接入网络接口API的模块  </span></div><div class="line"><span class="keyword">import</span> gTrans</div></pre></td></tr></table></figure></p>
+<p>详细代码：googleTranslate.translate(text, f, t)<br>参数说明：text为输入文本，f为原语言，t为目标语言<br>（3）  去除标点符号<br>语料中有很多符号，影响分类效果，需要单独去除。<br>详细代码：googleTranslate.delPunctuationStr(str)</p>
+<h5 id="3-模型训练"><a href="#3-模型训练" class="headerlink" title="3. 模型训练"></a>3. 模型训练</h5><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">def subClassifier(language)：  </div><div class="line"> 	#合并同语言的训练数据，提取训练数据，代码省略  </div><div class="line"> 	#classifier() 训练模型  </div><div class="line">	classifier(train_data, train_target,test_data, test_target, language)</div></pre></td></tr></table></figure>
+<p>调用模块：调用Python的机器学习模块sklearn，使用pipline简化过程。<br>算法：朴素贝叶斯，SVM，随机森林。<br>（1）  英文分类器<br>训练数据：已标注的英文语料 + 少量已标注的中文语料翻译成英文标注语料<br>测试数据：未标注的中文测试语料翻译成英文语料<br>参数设置：<br>以SVM为例：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">text_clf_svm = Pipeline([(<span class="string">'vect'</span>, CountVectorizer(stop_words =<span class="string">'english'</span>)),  </div><div class="line">     (<span class="string">'tfidf'</span>, TfidfTransformer()),  </div><div class="line">     (<span class="string">'clf'</span>, svm.SVC( C=<span class="number">1</span>,kernel = <span class="string">'linear'</span>)),  </div><div class="line">     ])</div></pre></td></tr></table></figure></p>
+<p>（2）  中文分类器<br>训练数据：已标注的英文语料翻译成中文标注语料 + 少量已标注的中文语料<br>测试数据：未标注的中文测试语料<br>参数设置：同（1）<br>（3）自学习分类器<br>利用已有的英文标注数据D0训练一个弱分类器M0，然后将中文未标注数据翻译成英文D1，弱分类器预测D1，将D1中得分最高的topK条数据（K条正向评论，K条负向评论）加入到D0 中，构成新的训练集，同时D1中删除对应的topK条评论。<br>不断迭代上面的过程，直到准确率不再上升终止（考虑到时间问题，只迭代了50次）。</p>
+<h5 id="4-结果对比与分析"><a href="#4-结果对比与分析" class="headerlink" title="4. 结果对比与分析"></a>4. 结果对比与分析</h5><p>4.1 实验结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">algorithm\data | book | dvd | music</div><div class="line">:----------- | :-----------: | -----------:</div><div class="line">NB(EN) | 0.698 | 0.72375 | 0.70625</div><div class="line">SVM(EN) | 0.76 | 0.77375 | 0.76325</div><div class="line">RandomForest(EN) | 0.68275 | 0.6995 | 0.6835</div><div class="line">NB(CN)| 0.67075 | 0.70225 | 0.69225</div><div class="line">SVM(CN) | 0.72475 | 0.7355 | 0.72475</div><div class="line">RandomForest(CN) | 0.6598 | 0.68022 | 0.67023</div><div class="line">RandomForest(EN) | 0.68275 | 0.6995 | 0.6835</div><div class="line">selfLearningSVM(EN) | 0.808 | 0.801 | 0.78925</div></pre></td></tr></table></figure>
+<p>4.2 结果分析<br>1） SVM比NB，RandForest结果都高，SVM(EN)的测试准确率在76~77%之间，。<br>2） 英文分类器比中文分类器准确率高，因为英文分类器的训练集是已标注的数据，中文分类器的训练数据是从英文标注数据翻译过来的，机器翻译的准确性影响最后的效果。<br>3） 自学习过程不断通过不断增大训练集，使得分类器的效果更准确。<br>4） 分类器训练运行时间供参考，机器配置对实验时间有很大的影响。</p>
+<p>4.3 总结<br>本文尝试了多种跨语言情感分类的方法，主要以SVM为主。由于训练有监督的分类器需要大量的已标注数据（本任务只提供12000条评论），所以采用了利用已有数据训练弱分类器，然后通过自学习过程，不断迭代增加训练数据的方法，得到更准确的分类器。实验证明这一方法确实有效，需要注意的是，考虑到自学习过程存在一定的误差，本文只在12000条未标注评论（小于已有训练数据）选择得分最高的topK加入训练集中。可做的改进是将中英文子分类的结果结合起来，即co-training过程，提高准确性。<br>另外，神经网络也可以用来做情感分类的过程，由于时间限制，神经网络的实验在报告里省略了。</p>
+<h5 id="5-问题及解决办法"><a href="#5-问题及解决办法" class="headerlink" title="5. 问题及解决办法"></a>5. 问题及解决办法</h5><p>（1）解析语料时出现：xml.etree.Element.ParseError<br>原因：有一个text里没有文本（只有评论id），需要提前判断做相应的处理<br>（2）翻译限制：<br>尝试了几种google翻译小工具，如goslate，报错HTTPError: HTTP Error 503: Service Unavailable。在官网查到原因：Google has updated its translation service recently with a ticketmechanism to prevent simple crawler program like goslate from accessing。<br>python 调用google translate API进行翻译的内容详见另一篇博客：<a href="http://blog.csdn.net/lrita/article/details/51298227" target="_blank" rel="external">http://blog.csdn.net/lrita/article/details/51298227</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/情感分析/" rel="tag">#情感分析</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/19/hexo-blog-start/" rel="prev" title="使用hexo搭建git博客">
+                使用hexo搭建git博客 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ritali.jpg"
+               alt="Ritali" />
+          <p class="site-author-name" itemprop="name">Ritali</p>
+          <p class="site-description motion-element" itemprop="description">live better and better</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Ritali" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/liverita" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/XilianLi" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ritali</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+&nbsp&nbsp|&nbsp&nbsp Total visited- <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp
+|&nbsp&nbsp User visited-<span id="busuanzi_value_site_uv"></span>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

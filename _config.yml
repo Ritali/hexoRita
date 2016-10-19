@@ -3,11 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
-author: John Doe
-language:
+title: Ritali's blog
+subtitle: live better and better
+description: live better and better
+author: Ritali
+email: lixilian7@gmail.com
+language: en
 timezone:
 
 # URL
@@ -63,9 +64,18 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+#theme: landscape
+theme: next
+
+# jpg
+avatar: /images/ritali.jpg
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+- type: git
+  repo: git@github.com:Ritali/ritali.github.io
+  branch: master
+- type: git
+  repo: git@git.coding.net:RitaLi/ritali.git
+  branch: coding-pages

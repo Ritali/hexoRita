@@ -1,0 +1,656 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="hexo," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="1. 环境安装好node和git,注册好github账号. 注意:用户名一定不能有大写.最新的git: http://msysgit.github.io/
+2.安装hexo:执行: npm install -g hexo
+3.创建hexo文件夹:创建hexo文件夹,如 E:\myblogs\hexoRitacmd到对应目录下执行: hexo init 
+4.安装依赖:npm install
+5.本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用hexo搭建git博客">
+<meta property="og:url" content="http://yoursite.com/2016/10/19/hexo-blog-start/index.html">
+<meta property="og:site_name" content="Ritali's blog">
+<meta property="og:description" content="1. 环境安装好node和git,注册好github账号. 注意:用户名一定不能有大写.最新的git: http://msysgit.github.io/
+2.安装hexo:执行: npm install -g hexo
+3.创建hexo文件夹:创建hexo文件夹,如 E:\myblogs\hexoRitacmd到对应目录下执行: hexo init 
+4.安装依赖:npm install
+5.本">
+<meta property="og:updated_time" content="2016-10-19T14:29:14.200Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用hexo搭建git博客">
+<meta name="twitter:description" content="1. 环境安装好node和git,注册好github账号. 注意:用户名一定不能有大写.最新的git: http://msysgit.github.io/
+2.安装hexo:执行: npm install -g hexo
+3.创建hexo文件夹:创建hexo文件夹,如 E:\myblogs\hexoRitacmd到对应目录下执行: hexo init 
+4.安装依赖:npm install
+5.本">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/10/19/hexo-blog-start/"/>
+
+
+  <title> 使用hexo搭建git博客 | Ritali's blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ritali's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">live better and better</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用hexo搭建git博客
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-10-19T10:46:20+08:00" content="2016-10-19">
+              2016-10-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          <span>&nbsp; | &nbsp; 
+          visited: &nbsp; <span id="busuanzi_value_page_pv" ></span>
+          </span>    
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="1-环境"><a href="#1-环境" class="headerlink" title="1. 环境"></a>1. 环境</h5><p>安装好node和git,注册好github账号. 注意:用户名一定不能有大写.<br>最新的git: <a href="http://msysgit.github.io/" target="_blank" rel="external">http://msysgit.github.io/</a></p>
+<h5 id="2-安装hexo"><a href="#2-安装hexo" class="headerlink" title="2.安装hexo:"></a>2.安装hexo:</h5><p>执行: npm install -g hexo</p>
+<h5 id="3-创建hexo文件夹"><a href="#3-创建hexo文件夹" class="headerlink" title="3.创建hexo文件夹:"></a>3.创建hexo文件夹:</h5><p>创建hexo文件夹,如 E:\myblogs\hexoRita<br>cmd到对应目录下执行: hexo init </p>
+<h5 id="4-安装依赖"><a href="#4-安装依赖" class="headerlink" title="4.安装依赖:"></a>4.安装依赖:</h5><p>npm install</p>
+<h5 id="5-本地测试"><a href="#5-本地测试" class="headerlink" title="5.本地测试:"></a>5.本地测试:</h5><p>hexo g<br>hexo s<br>在打开浏览器 localhost:4000，可以看到一个样例helloworld.</p>
+<h5 id="6-在github上创建博客仓库"><a href="#6-在github上创建博客仓库" class="headerlink" title="6.在github上创建博客仓库"></a>6.在github上创建博客仓库</h5><p>ritali.github.io(与用户名一致，不能有大写)<br>选择主题，发布</p>
+<h5 id="7-配置-config-yml"><a href="#7-配置-config-yml" class="headerlink" title="7. 配置_config.yml"></a>7. 配置_config.yml</h5><p>先执行 npm install hexo-deployer-git –save<br>deploy:</p>
+<ul>
+<li>type: git<br>repo: git@github.com:Ritali/ritali.github.io<br>branch: master</li>
+<li>type: git<br>repo: git@git.coding.net:RitaLi/ritali.git<br>branch: coding-pages</li>
+</ul>
+<p>再次执行hexo g, hexo s</p>
+<h5 id="8-访问"><a href="#8-访问" class="headerlink" title="8. 访问"></a>8. 访问</h5><p>coding 访问链接： <a href="http://ritali.coding.me/ritali/" target="_blank" rel="external">http://ritali.coding.me/ritali/</a><br>git 访问链接： ritali.github.io</p>
+<h5 id="附："><a href="#附：" class="headerlink" title="附："></a>附：</h5><p>1、在github上创建项目<br>2、使用git clone <a href="https://github.com/xxxxxxx/xxxxx.git克隆到本地" target="_blank" rel="external">https://github.com/xxxxxxx/xxxxx.git克隆到本地</a><br>3、编辑项目<br>4、git add . （将改动添加到暂存区）<br>5、git commit -m “提交说明”<br>    第一次提交建立关联：<br>    git remote add origin <a href="https://github.com/findingsea/myRepoForBlog.git" target="_blank" rel="external">https://github.com/findingsea/myRepoForBlog.git</a><br>6、git push origin master 将本地更改推送到远程master分支。<br>    在执行git push origin master时，报错：<br>　　error:failed to push som refs to…….<br>    git pull origin master</p>
+<p>hexo new page “tags”#新建目录<br>hexo new “blog”#新建文章</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hexo/" rel="tag">#hexo</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/19/sentiment classification/" rel="next" title="跨语言情感分析">
+                <i class="fa fa-chevron-left"></i> 跨语言情感分析
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/19/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/ritali.jpg"
+               alt="Ritali" />
+          <p class="site-author-name" itemprop="name">Ritali</p>
+          <p class="site-description motion-element" itemprop="description">live better and better</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Ritali" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/liverita" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/XilianLi" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ritali</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+&nbsp&nbsp|&nbsp&nbsp Total visited- <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp
+|&nbsp&nbsp User visited-<span id="busuanzi_value_site_uv"></span>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
